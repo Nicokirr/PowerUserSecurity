@@ -17,3 +17,17 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: PowerPlatformExportSolution@0
+  inputs:
+    authenticationType: 'PowerPlatformSPN'
+    PowerPlatformSPN: 'Power Platform Admin nicolaskirrmann.onmicrosoft.com'
+    SolutionName: 'PowerUserSecurityConfig'
+    SolutionOutputFile: 'PowerUserSecurityConfig.zip'
+    AsyncOperation: true
+    MaxAsyncWaitTime: '60'
+
+- task: PowerPlatformUnpackSolution@0
+  inputs:
+    SolutionInputFile: 'PowerUserSecurityConfig.zip'
+    SolutionTargetFolder: 'unpack/'
+    SolutionType: 'Both'
